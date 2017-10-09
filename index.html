@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8" />
     <title>クラゲのエアリー</title>
     <!-- ライブラリファイル -->
-<!--
+    <!--
     <link rel="stylesheet" href="lib/bootstrap.min.css">
 -->
     <!-- 自作ファイル群 -->
@@ -16,84 +17,125 @@
 </head>
 
 <!--  本体部分  -------------------------------------->
+
 <body>
-   
+
     <!--  ヘッダー(上部)部分  -->
     <header>
-       <div id="gauge">
+        <div id="gauge">
             <div id="energy" class="header-icon"><img src="img/energy.png" alt="エネルギー" class="header-icon-img">00000000</div>
             <div id="heart" class="header-icon"><img src="img/heart.png" alt="ハート" class="header-icon-img">00000000</div>
-       </div>
-       <div id="control-bar">
+        </div>
+        <div id="control-bar">
             <div id="setting" class="header-icon"><img src="img/setting.png" alt="設定" class="header-icon-img"></div>
             <div id="return" class="header-icon"><img src="img/return.png" alt="戻る" class="header-icon-img"></div>
-       </div>
+        </div>
     </header>
-    
+
     <!--  センタービジュアル部分  -->
     <div id="main-img">
-       <div id="Airy" class="bgv">
-        <img src="img/Airy/Airy-main1.png" alt="エアリー" id="Airy-img">
-       </div>
-       <div id="Mily" class="bgv">
-        <img src="img/Mily/Mily-main1.png" alt="ミリー" id="Mily-img">
-       </div>        
+        <div id="Airy" class="bgv">
+            <img src="img/Airy/Airy-main1.png" alt="エアリー" id="Airy-img">
+        </div>
+        <div id="Mily" class="bgv">
+            <img src="img/Mily/Mily-main1.png" alt="ミリー" id="Mily-img">
+        </div>
     </div>
-    
+
     <!--  メイン操作(下部)部分  -->
     <div id="mope" class="bg">
+        <!-- タブ操作のラジオボタン -->
+        <input id="mope-field-mily-ctrl" class="tab-radios" type="radio" name="mope-tab" checked>
+        <input id="mope-field-friend-ctrl" class="tab-radios" type="radio" name="mope-tab">
+
+        <!--  タブのラベル  -->
         <div id="mope-tag" class="bgv">
-            <ul class="side-by-side">
-                <li class="bgv">ミリー</li>
-                <li class="bgv">仲間</li>
+            <ul id="mope-tabs-list" class="side-by-side">
+                <li id="for-mope-field-mily" class="tab-label bgv">
+                    <label for="mope-field-mily-ctrl">ミリー</label>
+                </li>
+                <li id="for-mope-field-friend" class="tab-label bgv">
+                    <label for="mope-field-friend-ctrl">仲間</label>
+                </li>
             </ul>
         </div>
+
+        <!--  タブ表示の本体  -->
         <div id="mope-field" class="bg">
-            <div id="mope-field-f1" class="mope-field-f bgv">
-                <ul class="side-by-side">
-                    <li class="mope-field-lv bgv">Lv.</li>
-                    <li class="mope-field-des bgv">
-                        ベニクラゲ<br>
-                        説明説明説明説明説明説明説明<br>
-                        現在：00000000エネルギー/秒<br>
-                    </li>
-                    <li class="mope-field-up bgv">
-                        +00000000エネルギー/秒<br>
-                        00000000ハート
-                    </li>
-                </ul>
+            <!--  ミリー強化の表示画面  -->
+            <div id="mope-field-mily" class="mope-field-con">
+                <div id="mope-field-m1" class="mope-field-m mope-field-con bgv">
+                    <ul class="side-by-side">
+                        <li class="mope-field-lv bgv">Lv.</li>
+                        <li class="mope-field-des bgv">
+                            エネルギー効率UP<br> 説明説明説明説明説明説明説明
+                            <br> 現在：00000000エネルギー/秒
+                            <br>
+                        </li>
+                        <li class="mope-field-up bgv">
+                            +00000000エネルギー/秒<br> 00000000ハート
+                        </li>
+                    </ul>
+                </div>
+                <div id="mope-field-m2" class="mope-field-m bgv">
+                    <ul class="side-by-side">
+                        <li class="mope-field-lv bgv">Lv.</li>
+                        <li class="mope-field-des bgv">
+                            ハート効率UP<br> 説明説明説明説明説明説明説明
+                            <br> 現在：00000000ハート/秒
+                            <br>
+                        </li>
+                        <li class="mope-field-up bgv">
+                            +00000000ハート/秒<br> 00000000ハート
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div id="mope-field-f2" class="mope-field-f bgv">
-                <ul class="side-by-side">
-                    <li class="mope-field-lv bgv">Lv.</li>
-                    <li class="mope-field-des bgv">
-                        ベニクラゲ<br>
-                        説明説明説明説明説明説明説明<br>
-                        現在：00000000エネルギー/秒<br>
-                    </li>
-                    <li class="mope-field-up bgv">
-                        +00000000エネルギー/秒<br>
-                        00000000ハート
-                    </li>
-                </ul>
-            </div>
-            <div id="mope-field-f3" class="mope-field-f bgv">
-                <ul class="side-by-side">
-                    <li class="mope-field-lv bgv">Lv.</li>
-                    <li class="mope-field-des bgv">
-                        ベニクラゲ<br>
-                        説明説明説明説明説明説明説明<br>
-                        現在：00000000エネルギー/秒<br>
-                    </li>
-                    <li class="mope-field-up bgv">
-                        +00000000エネルギー/秒<br>
-                        00000000ハート
-                    </li>
-                </ul>
+            <!--  仲間たちの表示画面  -->
+            <div id="mope-field-friend" class="mope-field-con">
+                <div id="mope-field-f1" class="mope-field-f mope-field-con bgv">
+                    <ul class="side-by-side">
+                        <li class="mope-field-lv bgv">Lv.</li>
+                        <li class="mope-field-des bgv">
+                            ベニクラゲ<br> 説明説明説明説明説明説明説明
+                            <br> 現在：00000000エネルギー/秒
+                            <br>
+                        </li>
+                        <li class="mope-field-up bgv">
+                            +00000000エネルギー/秒<br> 00000000ハート
+                        </li>
+                    </ul>
+                </div>
+                <div id="mope-field-f2" class="mope-field-f bgv">
+                    <ul class="side-by-side">
+                        <li class="mope-field-lv bgv">Lv.</li>
+                        <li class="mope-field-des bgv">
+                            ベニクラゲ<br> 説明説明説明説明説明説明説明
+                            <br> 現在：00000000エネルギー/秒
+                            <br>
+                        </li>
+                        <li class="mope-field-up bgv">
+                            +00000000エネルギー/秒<br> 00000000ハート
+                        </li>
+                    </ul>
+                </div>
+                <div id="mope-field-f3" class="mope-field-f bgv">
+                    <ul class="side-by-side">
+                        <li class="mope-field-lv bgv">Lv.</li>
+                        <li class="mope-field-des bgv">
+                            ベニクラゲ<br> 説明説明説明説明説明説明説明
+                            <br> 現在：00000000エネルギー/秒
+                            <br>
+                        </li>
+                        <li class="mope-field-up bgv">
+                            +00000000エネルギー/秒<br> 00000000ハート
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    
+
     <!--  フッター(下部)部分  -->
     <footer>
         <ul id="footer-control" class="side-by-side bg">
@@ -101,14 +143,15 @@
             <li id="footer-control-evo" class="bgv">進化</li>
         </ul>
     </footer>
-    
+
     <!-- ライブラリファイル -->
-<!--
+    <!--
     <script src="lib/jquery-3.1.1.min.js"></script>
 -->
     <!-- 自作ファイル群 -->
-<!--    <script type="text/javascript" src="script/common.js"></script>
+    <!--    <script type="text/javascript" src="script/common.js"></script>
 -->
-    
+
 </body>
+
 </html>
