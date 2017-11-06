@@ -12,13 +12,80 @@
 
 --------------------------------*/
 
+/*-----------------------------------------------*/
+/* Localstrage準備 */
+/*-----------------------------------------------*/
+
+// localStorageが使用出来るかチェック
+if (!window.localStorage) {
+    swal({
+        title: "お使いのブラウザはlocalstorageに対応しておりません。",
+        text: "データの保持が出来ないため、このウインドウを閉じるとLvやエネルギー量、生命力量はリセットされます。",
+        dangerMode: true,
+    });
+}
+// localStorageに値を保存
+function setItem(key, val) {
+    window.localStorage.setItem(key, val);
+}
+
+// localStorageから値を取得、NULLだったら初期値を入れる
+function getItem(key, def) {
+    if (window.localStorage.getItem(key) == null) {
+        return def;
+    } else {
+        return parseInt(window.localStorage.getItem(key), 10);
+    }
+}
+
+// localStorageに保存されている、あるkeyの値を削除する
+function removeItem(key) {
+    window.localStorage.removeItem(key);
+}
+
+// localStorageに保存されているすべての値を削除する
+function clear() {
+    window.localStorage.clear();
+}
+
+/* オートセーブに関する機構 */
+var AUTO_SAVE = true;
+$(function () {
+    //    $('body').append('<div id="auto-save" class="select"><div class="center">1秒毎にオートセーブ有効</div></div>');
+    var autoSave = autoSaveDo();
+
+    function autoSaveDo() {
+        setInterval(function () {
+            console.log("---autoSave done")
+            setItem("ALL_ENERGY", ALL_ENERGY);
+            setItem("ALL_HEART", ALL_HEART);
+            setItem("mily.eLevel", mily.eLevel);
+            setItem("mily.hLevel", mily.hLevel);
+            setItem("andon.eLevel", andon.eLevel);
+            setItem("andon.hLevel", andon.hLevel);
+            setItem("beni.eLevel", beni.eLevel);
+            setItem("beni.hLevel", beni.hLevel);
+            setItem("tako.eLevel", tako.eLevel);
+            setItem("tako.hLevel", tako.hLevel);
+            setItem("sakasa.eLevel", sakasa.eLevel);
+            setItem("sakasa.hLevel", sakasa.hLevel);
+            setItem("echizen.eLevel", echizen.eLevel);
+            setItem("echizen.hLevel", echizen.hLevel);
+        }, 1000);
+    }
+});
+
+
+/*-----------------------------------------------*/
+/* 本体 */
+/*-----------------------------------------------*/
 /* エネルギーか生命力かを区別するための変数 */
 var ENERGY = 1;
 var HEART = 2;
 
 /* 全てのエネルギー、生命力量 */
-var ALL_ENERGY = 0;
-var ALL_HEART = 0;
+var ALL_ENERGY = getItem("ALL_ENERGY", 0);
+var ALL_HEART = getItem("ALL_HEART", 0);
 
 /* エネルギー量or生命力量を適切な単位の値にして、String形で返す */
 function allEHUnit(value) {
@@ -55,46 +122,39 @@ function allEHUnit(value) {
 
 console.log("debug" + 100 / 1000);
 /* クリックで生命力を増やす */
-$('main').click(function (e) {
+$('main').tap(function () {
     ALL_HEART++;
     console.log(ALL_HEART);
-    $('#heart').append('<span id="heart-increase-click">+1</span>');
     $('#heart-display').html(allEHUnit(ALL_HEART));
-    $('main').append('<p class="main-heart-des">+' + ALL_HEART + 'H</p>');
-    var off = $('main').offset();
-    off.top = ((e.pageY) - (off.top));
-    off.left = ((e.pageX) - (off.left));
-    console.log('top: ' + off.top);
-    console.log('left: ' + off.left);
-    $('.main-heart-des').css({
-        top: (off.top),
-        left: (off.left),
-        opacity: '1'
-    });
-    $('#heart-increase-click').animate({
-        opacity: '0',
+    $('#heart').append('<p id="heart-increase-click">+1</p>');
+    $('#Mily-tap').animate({
+        opacity: '0.5',
     }, 200);
-    $('.main-heart-des').animate({
+    $('#Mily-tap').animate({
+        opacity: '1',
+    }, 200);
+    $('#heart-increase-click').animate({
         opacity: '0',
     }, 200);
     setTimeout(function () {
         $('#heart-increase-click').remove();
-        $('.main-heart-des').remove();
     }, 400);
 });
 
 
 /* タブ操作 */
 $('#mily').click(function () {
-    console.log("mily clicked")
     $("#milyDis").removeClass("hide");
+    $("#mily").addClass("select");
     $("#milyDis").show();
     $("#friendDis").addClass("hide");
+    $("#friend").removeClass("select");
 });
 $('#friend').click(function () {
-    console.log("friend clicked")
     $("#milyDis").addClass("hide");
+    $("#mily").removeClass("select");
     $("#friendDis").removeClass("hide");
+    $("#friend").addClass("select");
     $("#friendDis").show();
 });
 
@@ -111,11 +171,11 @@ $('#friend').click(function () {
     needEDefault: エネルギー量のレベルを上げるのに必要生命力のデフォルト値
     needHDefault: 生命力量のレベルを上げるのに必要エネルギー量のデフォルト値
 */
-function Creatures(ed, hd, b, n) {
+function Creatures(ed, hd, b, n, el, hl) {
     this.energy = 0;
     this.eDefault = ed;
     this.heart = 0;
-    this.hDefault = ed;
+    this.hDefault = hd;
     this.bias = b;
 
     this.needEDefault = n;
@@ -123,8 +183,8 @@ function Creatures(ed, hd, b, n) {
     this.needHDefault = n;
     this.needH = n;
 
-    this.eLevel = 1;
-    this.hLevel = 1;
+    this.eLevel = el;
+    this.hLevel = hl;
 }
 
 /* 各生き物たちの名前ハッシュ */
@@ -138,12 +198,24 @@ var CreaturesName = {
 };
 
 // 各生き物のデータ定義
-var mily = new Creatures(0, 0, 1, 5);
-var andon = new Creatures(20, 0, 1, 10);
-var beni = new Creatures(200, 0, 2, 50);
-var tako = new Creatures(2000, 0, 3, 100);
-var sakasa = new Creatures(20000, 0, 4, 500);
-var echizen = new Creatures(200000, 0, 5, 1000);
+var mily = new Creatures(50000, 10, 1, 10,
+    getItem("mily.eLevel", 1),
+    getItem("mily.hLevel", 1));
+var andon = new Creatures(20, 0, 1, 10,
+    getItem("andon.eLevel", 1),
+    getItem("andon.hLevel", 1));
+var beni = new Creatures(200, 0, 2, 50,
+    getItem("beni.eLevel", 1),
+    getItem("beni.hLevel", 1));
+var tako = new Creatures(2000, 0, 3, 100,
+    getItem("tako.eLevel", 1),
+    getItem("tako.hLevel", 1));
+var sakasa = new Creatures(20000, 0, 4, 500,
+    getItem("sakasa.eLevel", 1),
+    getItem("sakasa.hLevel", 1));
+var echizen = new Creatures(200000, 0, 5, 1000,
+    getItem("echizen.eLevel", 1),
+    getItem("echizen.hLevel", 1));
 
 /* 生き物たちのデータ表示関数 -----------------------*/
 /* 生き物たちのレベル表示 */
@@ -158,25 +230,43 @@ function levelDisplay(eh, who, whoName) {
 /* レベルボタン部分の表示 */
 function levelUpDisplay(eh, who, whoName) {
     if (eh == ENERGY) {
-        $('#' + whoName + '-levelup-incE').html('+' +
-            (who.eDefault * ((who.eLevel + 1) * who.bias)) +
-            'エネルギー/秒');
+        if (who == mily) {
+            $('#' + whoName + '-levelup-incE').html('+' +
+                (who.eDefault * ((who.eLevel + 1) * who.bias)) +
+                'エネルギー/タップ');
+        } else {
+            $('#' + whoName + '-levelup-incE').html('+' +
+                (who.eDefault * ((who.eLevel + 1) * who.bias)) +
+                'エネルギー/秒');
+        }
         $('#' + whoName + '-levelup-needH').html('' + who.needE + '生命力');
     } else if (eh == HEART) {
         $('#' + whoName + '-levelup-incH').html('+' +
             (who.hDefault * ((who.hLevel + 1) * who.bias)) +
             '生命力/秒');
-        $('#' + whoName + '-levelup-needH').html('' + who.needH + 'エネルギー');
+        $('#' + whoName + '-levelup-needE').html('' + who.needH + 'エネルギー');
     }
 }
 
 /* 現在生成しているエネルギー量を表示 */
 function nowAmountDisplay(eh, who, whoName) {
     if (eh == ENERGY) {
-        $('#' + whoName + '-nowE').html('現在: ' + who.energy + 'エネルギー/秒');
+        if (who == mily) {
+            $('#' + whoName + '-nowE').html('現在: ' + who.energy + 'エネルギー/タップ');
+        } else {
+            $('#' + whoName + '-nowE').html('現在: ' + who.energy + 'エネルギー/秒');
+
+        }
     } else if (eh == HEART) {
         $('#' + whoName + '-nowH').html('現在: ' + who.heart + '生命力/秒');
     }
+}
+
+function creatureDisplay(eh, who, whoName) {
+    levelDisplay(eh, who, whoName);
+    levelUpDisplay(eh, who, whoName);
+    nowAmountDisplay(eh, who, whoName);
+
 }
 
 /* 各生き物達のデータ操作関数 ----------------*/
@@ -191,29 +281,32 @@ function levelUp(eh, who, whoName, amount) {
     if (eh == ENERGY) {
         $('#' + whoName + '-e-levelup').click(function () {
             if (ALL_HEART < who.needE) {
-                console.log("NOTIHING");
+                swal({
+                    title: "生命力が足りません！",
+                    text: "あと" + (who.needE - ALL_HEART) + "生命力を貯めましょう！",
+                });
                 return;
             }
             ALL_HEART -= who.needE;
+            who.needE *= who.eLevel;
             who.eLevel += amount;
             who.energy += who.eDefault * (who.eLevel * who.bias);
-            levelDisplay(ENERGY, who, whoName);
-            levelUpDisplay(ENERGY, who, whoName);
-            nowAmountDisplay(ENERGY, who, whoName);
+            creatureDisplay(ENERGY, who, whoName);
         });
     } else if (eh == HEART) {
         $('#' + whoName + '-h-levelup').click(function () {
             if (ALL_ENERGY < who.needH) {
-                console.log("NOTIHING");
+                swal({
+                    title: "エネルギーが足りません！",
+                    text: "あと" + (who.needH - ALL_ENERGY) + "エネルギーを貯めましょう！",
+                });
                 return;
             }
             ALL_ENERGY -= who.needH;
+            who.needH *= who.hLevel;
             who.hLevel += amount;
-            who.heart = who.hDefault * (who.hLevel * who.bias);
-            levelDisplay(HEART, who, whoName);
-            levelUpDisplay(HEART, who, whoName);
-            nowAmountDisplay(HEART, who, whoName);
-
+            who.heart += who.hDefault * (who.hLevel * who.bias);
+            creatureDisplay(HEART, who, whoName);
         });
     }
 }
@@ -228,6 +321,7 @@ function increaseAll() {
         echizen.energy;
     var allHeartInc = mily.heart;
     console.log("allEnergyInc is " + allEnergyInc);
+    console.log("heart inc is " + mily.heart);
     console.log("allHeartInc is " + allHeartInc);
     ALL_ENERGY += allEnergyInc;
     ALL_HEART += allHeartInc;
@@ -243,21 +337,13 @@ function increaseAll() {
 /* 実際に実行 ------------------------*/
 $(function () {
     // 各生き物のデータ表示
-    levelDisplay(ENERGY, mily, CreaturesName.mily);
-    levelDisplay(HEART, mily, CreaturesName.mily);
-    levelDisplay(ENERGY, andon, CreaturesName.andon);
-    levelDisplay(ENERGY, beni, CreaturesName.beni);
-    levelDisplay(ENERGY, tako, CreaturesName.tako);
-    levelDisplay(ENERGY, sakasa, CreaturesName.sakasa);
-    levelDisplay(ENERGY, echizen, CreaturesName.echizen);
-
-    levelUpDisplay(ENERGY, mily, CreaturesName.mily);
-    levelUpDisplay(HEART, mily, CreaturesName.mily);
-    levelUpDisplay(ENERGY, andon, CreaturesName.andon);
-    levelUpDisplay(ENERGY, beni, CreaturesName.beni);
-    levelUpDisplay(ENERGY, tako, CreaturesName.tako);
-    levelUpDisplay(ENERGY, sakasa, CreaturesName.sakasa);
-    levelUpDisplay(ENERGY, echizen, CreaturesName.echizen);
+    creatureDisplay(ENERGY, mily, CreaturesName.mily);
+    creatureDisplay(HEART, mily, CreaturesName.mily);
+    creatureDisplay(ENERGY, andon, CreaturesName.andon);
+    creatureDisplay(ENERGY, beni, CreaturesName.beni);
+    creatureDisplay(ENERGY, tako, CreaturesName.tako);
+    creatureDisplay(ENERGY, sakasa, CreaturesName.sakasa);
+    creatureDisplay(ENERGY, echizen, CreaturesName.echizen);
 
     levelUp(ENERGY, mily, CreaturesName.mily, 1);
     levelUp(HEART, mily, CreaturesName.mily, 1);

@@ -22,56 +22,58 @@ ul { list-style: none; }
 
 ul.side-by-side li { display: inline-block; }
 
+.center { text-align: center; }
+
 /*--------------------------------------------------*/
 /* ゲーム部分本体のCSS */
 /*--------------------------------------------------*/
 /*------------------------*/
 /* ヘッダー(上部)部分のCSS */
 /*------------------------*/
-#header { z-index: 100; }
-
-#gauge { top: 30px; left: 20px; position: fixed; font-size: 30px; color: white; }
-#gauge .increase { font-size: .6em; }
-
-.header-icon { margin: 8px; }
-
-.header-icon-img { height: 32px; margin-right: 8px; }
-
-#control-bar { top: 30px; right: 20px; position: fixed; }
+header { z-index: 100; }
+header .header-icon { margin: 8px; }
+header .header-icon-img { height: 32px; margin-right: 8px; }
+header #gauge { top: 1em; left: 20px; position: fixed; font-size: 30px; color: white; }
+header #gauge .increase { font-size: .6em; }
+header #gauge #heart { position: relative; }
+header #control-bar { top: 1em; right: 20px; position: fixed; }
 
 /*------------------------*/
 /* センタービジュアル(中央)部分のCSS */
 /*------------------------*/
-main { width: 100%; height: 700px; background-color: #rgba 255, 255, 255, 0.5; }
+main { position: relative; width: 100%; height: 800px; background-color: rgba(254, 254, 254, 0.3); }
 
-#Airy { top: 200px; width: 100%; position: absolute; text-align: center; }
+#Airy { position: absolute; top: 200px; width: 100%; text-align: center; }
 
 #Airy-img { height: 330px; }
 
-#Mily { top: 300px; width: 100%; position: absolute; text-align: center; }
+#Mily { position: absolute; top: 300px; width: 100%; text-align: center; }
 
 #Mily-img { height: 150px; }
+
+#Mily-tap { position: absolute; bottom: 0px; right: 0px; width: 100px; background-color: #aaa; }
 
 /*------------------------*/
 /* メイン操作(下部)部分のCSS */
 /*------------------------*/
-.tab { overflow: hidden; }
-.tab li.select { background: black; }
-
+/* タブ表示のCSSここから */
 #mope { top: 800px; width: 95%; height: 35%; position: absolute; margin: 20px; }
-
-#mope-tab { /* タブ表示のCSSここから */ }
-#mope-tab .tab-label { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; cursor: pointer; -webkit-transition-duration: .2s; transition-duration: .2s; }
-#mope-tab .tab-label:hover { color: #666; }
-
-#mope-tab { margin-bottom: 10px; }
-#mope-tab li { padding: 10px 20px; }
+#mope #mope-tab { margin-bottom: 10px; }
+#mope #mope-tab li { padding: 10px 20px; }
+#mope .tab-label { position: relative; background-color: rgba(255, 255, 255, 0.5); border-radius: 5px; }
+#mope .select { background-color: rgba(255, 255, 255, 0.8); }
+#mope .select:before { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -20px; border: 10px solid transparent; border-top: 10px solid rgba(255, 255, 255, 0.8); }
 
 #mope-field { margin-top: 20px; }
+#mope-field .con { background-color: rgba(255, 255, 255, 0.7); }
+#mope-field .con:hover { background-color: rgba(255, 255, 255, 0.8); }
 #mope-field .con:not(:first-child) { margin-top: 10px; }
-#mope-field .lv { width: 15%; padding: 10px; }
+#mope-field .lv { width: 15%; padding: 10px; text-align: center; }
 #mope-field .des { width: 50%; padding: 10px; }
-#mope-field .up { width: 20%; padding: 10px; font-size: 20px; }
+#mope-field .des-des { margin: .5em; font-size: .7em; }
+#mope-field .nowEH { margin-top: .5em; font-size: .8em; text-align: right; }
+#mope-field .up { width: 20%; padding: 10px; font-size: .8em; text-align: center; }
+#mope-field .up:hover { color: #555; }
 
 .hide { display: none; }
 
@@ -80,13 +82,12 @@ main { width: 100%; height: 700px; background-color: #rgba 255, 255, 255, 0.5; }
 /* フッター(下部)部分のCSS */
 /*------------------------*/
 footer { bottom: 0; position: fixed; width: 100%; z-index: 100; }
-
-#footer-control li { width: 45%; margin-left: 10px; margin-bottom: 10px; padding: 10px; text-align: center; font-size: 40px; }
+footer .btn { width: 45%; margin-left: 10px; margin-bottom: 10px; padding: 10px; text-align: center; font-size: 1.2em; background-color: rgba(255, 255, 255, 0.8); }
 
 /*--------------------------------------------------*/
 /* デバッグ用CSS */
 /*--------------------------------------------------*/
-.bgv { background-color: white; opacity: .8; }
+.bgv { background-color: white; }
 
 /*--------------------------------------------------*/
 /* smart.css  画面の横幅が640pxまで */
@@ -99,14 +100,14 @@ footer { bottom: 0; position: fixed; width: 100%; z-index: 100; }
 /*--------------------------------------------------*/
 /* ゲーム部分本体のCSS */
 /*--------------------------------------------------*/
-#heart-increase-click { margin-left: 2em; padding: .5em 1em; font-size: .5em; color: black; border-radius: 100px; background-color: rgba(254, 254, 254, 0.5); transition: all .5s; }
-
-.main-heart-des { position: absolute; width: 6em; padding: .5em; background-color: rgba(0, 0, 0, 0.5); font-size: .5em; color: white; z-index: 110; transition: all .3s; }
+#heart-increase-click { position: absolute; bottom: -1em; right: -5em; margin-left: 2em; padding: .5em 1em; font-size: .5em; color: black; border-radius: 100px; background-color: rgba(254, 254, 254, 0.5); transition: all .5s; }
 
 /* 基礎タグにつけるCSS ---------------------*/
 body { overflow-x: hidden; }
 
 /* ライブラリ等で追加された要素につけるCSS -------*/
+.swal-footer { background-color: #CBE6F3; margin-top: 32px; border-top: 1px solid #E9EEF1; overflow: hidden; }
+
 /* その他 */
 @keyframes show1 { 0% { transform: translate(0, 2em); opacity: .5; }
   100% { transform: translate(0, 0); opacity: 1; } }

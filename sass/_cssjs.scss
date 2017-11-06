@@ -11,6 +11,9 @@
 /*--------------------------------------------------*/
 
 #heart-increase-click {
+    position: absolute;
+    bottom: -1em;
+    right: -5em;
     margin-left: 2em;
     padding: .5em 1em;
     font-size: .5em;
@@ -20,13 +23,17 @@
     transition: all .5s;
 }
 
-.main-heart-des {
-    position: absolute;
-    width: 6em;
-    padding: .5em;
-    background-color: rgba(0, 0, 0, 0.5);
-    font-size: .5em;
-    color: white;
-    z-index: 110;
-    transition: all .3s;
-}
+//#auto-save {
+//    position: fixed;
+//    width: 100%;
+//    top: 0;
+//    padding: .2em;
+//    color: white;
+//    background-color: rgba(120, 230, 255, 0.1);
+//}
+//
+//#auto-save.select {
+//    color: black;
+//    background-color: rgba(120, 230, 255, 1);
+//    opacity: .5;
+//}

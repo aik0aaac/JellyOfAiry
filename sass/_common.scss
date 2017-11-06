@@ -98,6 +98,9 @@ ul.side-by-side li {
     display: inline-block;
 }
 
+.center {
+    text-align: center;
+}
 
 /*--------------------------------------------------*/
 
@@ -111,35 +114,40 @@ ul.side-by-side li {
 
 /*------------------------*/
 
-#header {
+header {
     z-index: 100;
-}
+    .header-icon {
+        margin: 8px;
+    }
+    .header-icon-img {
+        height: 32px;
+        margin-right: 8px;
+    }
 
-#gauge {
-    top: 30px;
-    left: 20px;
-    position: fixed;
-    font-size: 30px;
-    color: white;
-    .increase {
-        font-size: .6em;
+    #gauge {
+        top: 1em;
+        left: 20px;
+        position: fixed;
+        font-size: 30px;
+        color: white;
+        .increase {
+            font-size: .6em;
+        }
+        #heart {
+            position: relative;
+        }
+    }
+
+    #control-bar {
+        top: 1em;
+        right: 20px;
+        position: fixed;
     }
 }
 
-.header-icon {
-    margin: 8px;
-}
 
-.header-icon-img {
-    height: 32px;
-    margin-right: 8px;
-}
 
-#control-bar {
-    top: 30px;
-    right: 20px;
-    position: fixed;
-}
+
 
 /*------------------------*/
 
@@ -148,15 +156,16 @@ ul.side-by-side li {
 /*------------------------*/
 
 main {
+    position: relative;
     width: 100%;
-    height: 700px;
-    background-color: #rgba(255, 255, 255, .5);
+    height: 800px;
+    background-color: rgba(254, 254, 254, 0.3);
 }
 
 #Airy {
+    position: absolute;
     top: 200px;
     width: 100%;
-    position: absolute;
     text-align: center;
 }
 
@@ -165,14 +174,22 @@ main {
 }
 
 #Mily {
+    position: absolute;
     top: 300px;
     width: 100%;
-    position: absolute;
     text-align: center;
 }
 
 #Mily-img {
     height: 150px;
+}
+
+#Mily-tap {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 100px;
+    background-color: #aaa;
 }
 
 /*------------------------*/
@@ -181,12 +198,7 @@ main {
 
 /*------------------------*/
 
-.tab {
-    overflow: hidden;
-    li.select {
-        background: black;
-    }
-}
+/* タブ表示のCSSここから */
 
 #mope {
     top: 800px;
@@ -194,53 +206,70 @@ main {
     height: 35%;
     position: absolute;
     margin: 20px;
-}
-
-#mope-tab {
-    /* タブ表示のCSSここから */
+    #mope-tab {
+        margin-bottom: 10px;
+        li {
+            padding: 10px 20px;
+        }
+    }
     .tab-label {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        cursor: pointer;
-        -webkit-transition-duration: .2s;
-        transition-duration: .2s;
+        position: relative;
+        background-color: rgba(255, 255, 255, .5);
+        border-radius: 5px;
     }
-
-    .tab-label:hover {
-        color: #666;
+    .select {
+        background-color: rgba(255, 255, 255, .8);
     }
-}
-
-
-
-#mope-tab {
-    margin-bottom: 10px;
-    li {
-        padding: 10px 20px;
+    .select:before {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -20px;
+        border: 10px solid transparent;
+        border-top: 10px solid rgba(255, 255, 255, .8);
     }
 }
 
 
 #mope-field {
     margin-top: 20px;
+    .con {
+        background-color: rgba(255, 255, 255, .7);
+    }
+    .con:hover {
+        background-color: rgba(255, 255, 255, .8);
+    }
     .con:not(:first-child) {
         margin-top: 10px;
     }
     .lv {
         width: 15%;
         padding: 10px;
+        text-align: center;
     }
     .des {
         width: 50%;
         padding: 10px;
     }
+    .des-des {
+        margin: .5em;
+        font-size: .7em;
 
+    }
+    .nowEH {
+        margin-top: .5em;
+        font-size: .8em;
+        text-align: right;
+    }
     .up {
         width: 20%;
         padding: 10px;
-        font-size: 20px;
+        font-size: .8em;
+        text-align: center;
+    }
+    .up:hover {
+        color: #555;
     }
 }
 
@@ -261,16 +290,17 @@ footer {
     position: fixed;
     width: 100%;
     z-index: 100;
+    .btn {
+        width: 45%;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+        text-align: center;
+        font-size: 1.2em;
+        background-color: rgba(255, 255, 255, .8);
+    }
 }
 
-#footer-control li {
-    width: 45%;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
-    text-align: center;
-    font-size: 40px;
-}
 
 /*--------------------------------------------------*/
 
@@ -280,7 +310,6 @@ footer {
 
 .bgv {
     background-color: white;
-    opacity: .8;
 }
 
 /*--------------------------------------------------*/

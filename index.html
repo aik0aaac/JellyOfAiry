@@ -5,9 +5,6 @@
     <meta charset="UTF-8" />
     <title>クラゲのエアリー</title>
     <!-- ライブラリファイル -->
-    <!--
-    <link rel="stylesheet" href="lib/bootstrap.min.css">
--->
     <!-- 自作ファイル群 -->
     <link rel="stylesheet" href="css/index.css">
     <!--アイコン-->
@@ -47,16 +44,17 @@
         <div id="Mily" class="bgv">
             <img src="img/Mily/Mily-main1.png" alt="ミリー" id="Mily-img">
         </div>
+        <div id="Mily-tap">aaa</div>
     </main>
 
     <!--  メイン操作(下部)部分  -->
     <div id="mope" class="bg">
         <!--  タブの操作  -->
         <ul id="mope-tab" class="tab side-by-side">
-            <li id="mily" class="tab-label bgv select">
+            <li id="mily" class="tab-label select">
                 ミリー
             </li>
-            <li id="friend" class="tab-label bgv">
+            <li id="friend" class="tab-label">
                 仲間
             </li>
         </ul>
@@ -65,109 +63,121 @@
         <ul id="mope-field" class="bg tab-con">
             <!--  ミリー強化の表示画面  -->
             <li id="milyDis" class="mainCon">
-                <div id="dis1" class="con bgv">
+                <div id="dis1" class="con">
                     <ul class="side-by-side">
-                        <li id="Mily-e-lv" class="lv bgv"></li>
-                        <li class="des bgv">
+                        <li id="Mily-e-lv" class="lv"></li>
+                        <li class="des">
                             エネルギー効率UP<br>
-                            <span class="des">説明説明説明説明説明説明説明</span><br>
-                            <span id="Mily-nowE">現在：0エネルギー/秒</span>
-                            <br>
+                            <div class="des-des">
+                                落ちてくるゴミを取り込みエネルギーへと変換してくれる。<br> レベルが上がると、エネルギーへの変換効率が上がる。
+                            </div>
+                            <div id="Mily-nowE" class="nowEH">現在：0エネルギー/タップ</div>
                         </li>
-                        <li id="Mily-e-levelup" class="up bgv">
+                        <li id="Mily-e-levelup" class="up">
                             <span id="Mily-levelup-incE">+0生命力/秒</span><br>
                             <span id="Mily-levelup-needH">0生命力</span>
                         </li>
                     </ul>
                 </div>
-                <div id="dis2" class="bgv">
+                <div id="dis2" class="con">
                     <ul class="side-by-side">
-                        <li id="Mily-h-lv" class="lv bgv"></li>
-                        <li class="des bgv">
+                        <li id="Mily-h-lv" class="lv"></li>
+                        <li class="des">
                             生命力効率UP<br>
-                            <span class="des">説明説明説明説明説明説明説明</span><br>
-                            <span id="Mily-nowH">現在：0生命力/秒</span>
-                            <br>
+                            <div class="des-des">
+                                水中に漂う栄養素を取り込み、生命力として貯めてくれる。<br> レベルが上がると、より多くの栄養素を取り込み、貯めることが出来る。
+                            </div>
+                            <div id="Mily-nowH" class="nowEH">現在：0生命力/秒</div>
                         </li>
-                        <li id="Mily-h-levelup" class="up bgv">
+                        <li id="Mily-h-levelup" class="up">
                             <span id="Mily-levelup-incH">+0生命力/秒</span><br>
-                            <span id="Mily-levelup-needH">0生命力</span>
+                            <span id="Mily-levelup-needE">0生命力</span>
                         </li>
                     </ul>
                 </div>
             </li>
             <!--  仲間たちの表示画面  -->
             <li id="friendDis" class="hide mainCon">
-                <div id="dis1" class="con bgv">
+                <div id="dis1" class="con">
                     <ul class="side-by-side">
-                        <li id="Andon-e-lv" class="lv bgv"></li>
-                        <li class="des bgv">
+                        <li id="Andon-e-lv" class="lv"></li>
+                        <li class="des">
                             アンドンクラゲ<br>
-                            <span class="des">説明説明説明説明説明説明説明</span><br>
-                            <span id="Andon-nowE">現在：0エネルギー/秒</span>
-                            <br>
+                            <span class="des-des">
+                                長い触手を巧みに操り、遠くの獲物も逃さずキャッチする。<br>
+                                レベルを上げることでよりたくさんのクラゲが協力してくれる。
+                            </span><br>
+                            <div id="Andon-nowE" class="nowEH">現在：0エネルギー/秒</div>
                         </li>
-                        <li id="Andon-e-levelup" class="up bgv">
+                        <li id="Andon-e-levelup" class="up">
                             <span id="Andon-levelup-incE">+0エネルギー/秒</span><br>
                             <span id="Andon-levelup-needH">0生命力</span>
                         </li>
                     </ul>
                 </div>
-                <div id="dis2" class="bgv">
+                <div id="dis2" class="con">
                     <ul class="side-by-side">
-                        <li id="Beni-e-lv" class="lv bgv"></li>
-                        <li class="des bgv">
+                        <li id="Beni-e-lv" class="lv"></li>
+                        <li class="des">
                             ベニクラゲ<br>
-                            <span class="des">説明説明説明説明説明説明説明</span><br>
-                            <span id="Beni-nowE">現在：0エネルギー/秒</span>
-                            <br>
+                            <span class="des-des">
+                                色鮮やかな赤が特徴的。とっても小さいけれど働き者。<br>
+                                レベルを上げることでよりたくさんのクラゲが協力してくれる。
+                            </span><br>
+                            <div id="Beni-nowE" class="nowEH">現在：0エネルギー/秒</div>
                         </li>
-                        <li id="Beni-e-levelup" class="up bgv">
+                        <li id="Beni-e-levelup" class="up">
                             <span id="Beni-levelup-incE">+0エネルギー/秒</span><br>
                             <span id="Beni-levelup-needH">0生命力</span>
                         </li>
                     </ul>
                 </div>
-                <div id="dis3" class="bgv">
+                <div id="dis3" class="con">
                     <ul class="side-by-side">
-                        <li id="Tako-e-lv" class="lv bgv"></li>
-                        <li class="des bgv">
-                            タコクラゲ
-                            <span class="des">説明説明説明説明説明説明説明</span><br>
-                            <span id="Tako-nowE">現在：0エネルギー/秒</span>
-                            <br>
+                        <li id="Tako-e-lv" class="lv"></li>
+                        <li class="des">
+                            タコクラゲ<br>
+                            <span class="des-des">
+                                斑点の様に見えるものは実は藻の一種。この藻とは持ちつ持たれつの関係。<br>
+                                レベルを上げることでよりたくさんのクラゲが協力してくれる。
+                            </span><br>
+                            <div id="Tako-nowE" class="nowEH">現在：0エネルギー/秒</div>
                         </li>
-                        <li id="Tako-e-levelup" class="up bgv">
+                        <li id="Tako-e-levelup" class="up">
                             <span id="Tako-levelup-incE">+0エネルギー/秒</span><br>
                             <span id="Tako-levelup-needH">0生命力</span>
                         </li>
                     </ul>
                 </div>
-                <div id="dis3" class="bgv">
+                <div id="dis4" class="con">
                     <ul class="side-by-side">
-                        <li id="Sakasa-e-lv" class="lv bgv"></li>
-                        <li class="des bgv">
-                            サカサクラゲ
-                            <span class="des">説明説明説明説明説明説明説明</span><br>
-                            <span id="Sakasa-nowE">現在：0エネルギー/秒</span>
-                            <br>
+                        <li id="Sakasa-e-lv" class="lv"></li>
+                        <li class="des">
+                            サカサクラゲ<br>
+                            <span class="des-des">
+                                砂の上に張り付き、逆さになって泳ぐ変わり者。マイペースな所も…。<br>
+                                レベルを上げることでよりたくさんのクラゲが協力してくれる。
+                            </span><br>
+                            <div id="Sakasa-nowE" class="nowEH">現在：0エネルギー/秒</div>
                         </li>
-                        <li id="Sakasa-e-levelup" class="up bgv">
+                        <li id="Sakasa-e-levelup" class="up">
                             <span id="Sakasa-levelup-incE">+0エネルギー/秒</span><br>
                             <span id="Sakasa-levelup-needH">0生命力</span>
                         </li>
                     </ul>
                 </div>
-                <div id="dis3" class="bgv">
+                <div id="dis5" class="con">
                     <ul class="side-by-side">
-                        <li id="Echizen-e-lv" class="lv bgv"></li>
-                        <li class="des bgv">
-                            エチゼンクラゲ
-                            <span class="des">説明説明説明説明説明説明説明</span><br>
-                            <span id="Echizen-nowE">現在：0エネルギー/秒</span>
-                            <br>
+                        <li id="Echizen-e-lv" class="lv"></li>
+                        <li class="des">
+                            エチゼンクラゲ<br>
+                            <span class="des-des">
+                                その巨体を住処にするために寄って来る魚を嫌がっている。でもその魚たちを食べたりはしない。<br>
+                                レベルを上げることでよりたくさんのクラゲが協力してくれる。
+                            </span><br>
+                            <div id="Echizen-nowE" class="nowEH">現在：0エネルギー/秒</div>
                         </li>
-                        <li id="Echizen-e-levelup" class="up bgv">
+                        <li id="Echizen-e-levelup" class="up">
                             <span id="Echizen-levelup-incE">+0エネルギー/秒</span><br>
                             <span id="Echizen-levelup-needH">0生命力</span>
                         </li>
@@ -180,13 +190,15 @@
     <!--  フッター(下部)部分  -->
     <footer>
         <ul id="footer-control" class="side-by-side bg">
-            <li id="home" class="bgv">ホーム</li>
-            <li id="evo" class="bgv">進化</li>
+            <li id="home" class="btn">ホーム</li>
+            <li id="evo" class="btn">進化</li>
         </ul>
     </footer>
 
     <!-- ライブラリファイル -->
     <script src="lib/jquery-3.1.1.min.js"></script>
+    <script src="lib/tap.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- 自作ファイル群 -->
     <script type="text/javascript" src="script/common.js"></script>
 
