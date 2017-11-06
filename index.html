@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="lib/bootstrap.min.css">
 -->
     <!-- 自作ファイル群 -->
-    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
     <!--アイコン-->
     <link rel="icon" sizes="32x32" href="img/favicon.png">
@@ -23,8 +22,16 @@
     <!--  ヘッダー(上部)部分  -->
     <header>
         <div id="gauge">
-            <div id="energy" class="header-icon"><img src="img/energy.png" alt="エネルギー" class="header-icon-img">00000000</div>
-            <div id="heart" class="header-icon"><img src="img/heart.png" alt="ハート" class="header-icon-img">00000000</div>
+            <div id="energy" class="header-icon">
+                <img src="img/energy.png" alt="エネルギー" class="header-icon-img">
+                <span id="energy-display">0</span>
+                <span id="energy-increase" class="increase"></span>
+            </div>
+            <div id="heart" class="header-icon">
+                <img src="img/heart.png" alt="生命力" class="header-icon-img">
+                <span id="heart-display">0</span>
+                <span id="heart-increase" class="increase"></span>
+            </div>
         </div>
         <div id="control-bar">
             <div id="setting" class="header-icon"><img src="img/setting.png" alt="設定" class="header-icon-img"></div>
@@ -33,124 +40,155 @@
     </header>
 
     <!--  センタービジュアル部分  -->
-    <div id="main-img">
-        <div id="Airy" class="bgv">
+    <main>
+        <div id="Airy" class="bgv select">
             <img src="img/Airy/Airy-main1.png" alt="エアリー" id="Airy-img">
         </div>
         <div id="Mily" class="bgv">
             <img src="img/Mily/Mily-main1.png" alt="ミリー" id="Mily-img">
         </div>
-    </div>
+    </main>
 
     <!--  メイン操作(下部)部分  -->
     <div id="mope" class="bg">
-        <!-- タブ操作のラジオボタン -->
-        <input id="mope-field-mily-ctrl" class="tab-radios" type="radio" name="mope-tab" checked>
-        <input id="mope-field-friend-ctrl" class="tab-radios" type="radio" name="mope-tab">
-
-        <!--  タブのラベル  -->
-        <div id="mope-tag" class="bgv">
-            <ul id="mope-tabs-list" class="side-by-side">
-                <li id="for-mope-field-mily" class="tab-label bgv">
-                    <label for="mope-field-mily-ctrl">ミリー</label>
-                </li>
-                <li id="for-mope-field-friend" class="tab-label bgv">
-                    <label for="mope-field-friend-ctrl">仲間</label>
-                </li>
-            </ul>
-        </div>
+        <!--  タブの操作  -->
+        <ul id="mope-tab" class="tab side-by-side">
+            <li id="mily" class="tab-label bgv select">
+                ミリー
+            </li>
+            <li id="friend" class="tab-label bgv">
+                仲間
+            </li>
+        </ul>
 
         <!--  タブ表示の本体  -->
-        <div id="mope-field" class="bg">
+        <ul id="mope-field" class="bg tab-con">
             <!--  ミリー強化の表示画面  -->
-            <div id="mope-field-mily" class="mope-field-con">
-                <div id="mope-field-m1" class="mope-field-m mope-field-con bgv">
+            <li id="milyDis" class="mainCon">
+                <div id="dis1" class="con bgv">
                     <ul class="side-by-side">
-                        <li class="mope-field-lv bgv">Lv.</li>
-                        <li class="mope-field-des bgv">
-                            エネルギー効率UP<br> 説明説明説明説明説明説明説明
-                            <br> 現在：00000000エネルギー/秒
+                        <li id="Mily-e-lv" class="lv bgv"></li>
+                        <li class="des bgv">
+                            エネルギー効率UP<br>
+                            <span class="des">説明説明説明説明説明説明説明</span><br>
+                            <span id="Mily-nowE">現在：0エネルギー/秒</span>
                             <br>
                         </li>
-                        <li class="mope-field-up bgv">
-                            +00000000エネルギー/秒<br> 00000000ハート
+                        <li id="Mily-e-levelup" class="up bgv">
+                            <span id="Mily-levelup-incE">+0生命力/秒</span><br>
+                            <span id="Mily-levelup-needH">0生命力</span>
                         </li>
                     </ul>
                 </div>
-                <div id="mope-field-m2" class="mope-field-m bgv">
+                <div id="dis2" class="bgv">
                     <ul class="side-by-side">
-                        <li class="mope-field-lv bgv">Lv.</li>
-                        <li class="mope-field-des bgv">
-                            ハート効率UP<br> 説明説明説明説明説明説明説明
-                            <br> 現在：00000000ハート/秒
+                        <li id="Mily-h-lv" class="lv bgv"></li>
+                        <li class="des bgv">
+                            生命力効率UP<br>
+                            <span class="des">説明説明説明説明説明説明説明</span><br>
+                            <span id="Mily-nowH">現在：0生命力/秒</span>
                             <br>
                         </li>
-                        <li class="mope-field-up bgv">
-                            +00000000ハート/秒<br> 00000000ハート
+                        <li id="Mily-h-levelup" class="up bgv">
+                            <span id="Mily-levelup-incH">+0生命力/秒</span><br>
+                            <span id="Mily-levelup-needH">0生命力</span>
                         </li>
                     </ul>
                 </div>
-            </div>
+            </li>
             <!--  仲間たちの表示画面  -->
-            <div id="mope-field-friend" class="mope-field-con">
-                <div id="mope-field-f1" class="mope-field-f mope-field-con bgv">
+            <li id="friendDis" class="hide mainCon">
+                <div id="dis1" class="con bgv">
                     <ul class="side-by-side">
-                        <li class="mope-field-lv bgv">Lv.</li>
-                        <li class="mope-field-des bgv">
-                            ベニクラゲ<br> 説明説明説明説明説明説明説明
-                            <br> 現在：00000000エネルギー/秒
+                        <li id="Andon-e-lv" class="lv bgv"></li>
+                        <li class="des bgv">
+                            アンドンクラゲ<br>
+                            <span class="des">説明説明説明説明説明説明説明</span><br>
+                            <span id="Andon-nowE">現在：0エネルギー/秒</span>
                             <br>
                         </li>
-                        <li class="mope-field-up bgv">
-                            +00000000エネルギー/秒<br> 00000000ハート
+                        <li id="Andon-e-levelup" class="up bgv">
+                            <span id="Andon-levelup-incE">+0エネルギー/秒</span><br>
+                            <span id="Andon-levelup-needH">0生命力</span>
                         </li>
                     </ul>
                 </div>
-                <div id="mope-field-f2" class="mope-field-f bgv">
+                <div id="dis2" class="bgv">
                     <ul class="side-by-side">
-                        <li class="mope-field-lv bgv">Lv.</li>
-                        <li class="mope-field-des bgv">
-                            ベニクラゲ<br> 説明説明説明説明説明説明説明
-                            <br> 現在：00000000エネルギー/秒
+                        <li id="Beni-e-lv" class="lv bgv"></li>
+                        <li class="des bgv">
+                            ベニクラゲ<br>
+                            <span class="des">説明説明説明説明説明説明説明</span><br>
+                            <span id="Beni-nowE">現在：0エネルギー/秒</span>
                             <br>
                         </li>
-                        <li class="mope-field-up bgv">
-                            +00000000エネルギー/秒<br> 00000000ハート
+                        <li id="Beni-e-levelup" class="up bgv">
+                            <span id="Beni-levelup-incE">+0エネルギー/秒</span><br>
+                            <span id="Beni-levelup-needH">0生命力</span>
                         </li>
                     </ul>
                 </div>
-                <div id="mope-field-f3" class="mope-field-f bgv">
+                <div id="dis3" class="bgv">
                     <ul class="side-by-side">
-                        <li class="mope-field-lv bgv">Lv.</li>
-                        <li class="mope-field-des bgv">
-                            ベニクラゲ<br> 説明説明説明説明説明説明説明
-                            <br> 現在：00000000エネルギー/秒
+                        <li id="Tako-e-lv" class="lv bgv"></li>
+                        <li class="des bgv">
+                            タコクラゲ
+                            <span class="des">説明説明説明説明説明説明説明</span><br>
+                            <span id="Tako-nowE">現在：0エネルギー/秒</span>
                             <br>
                         </li>
-                        <li class="mope-field-up bgv">
-                            +00000000エネルギー/秒<br> 00000000ハート
+                        <li id="Tako-e-levelup" class="up bgv">
+                            <span id="Tako-levelup-incE">+0エネルギー/秒</span><br>
+                            <span id="Tako-levelup-needH">0生命力</span>
                         </li>
                     </ul>
                 </div>
-            </div>
-        </div>
+                <div id="dis3" class="bgv">
+                    <ul class="side-by-side">
+                        <li id="Sakasa-e-lv" class="lv bgv"></li>
+                        <li class="des bgv">
+                            サカサクラゲ
+                            <span class="des">説明説明説明説明説明説明説明</span><br>
+                            <span id="Sakasa-nowE">現在：0エネルギー/秒</span>
+                            <br>
+                        </li>
+                        <li id="Sakasa-e-levelup" class="up bgv">
+                            <span id="Sakasa-levelup-incE">+0エネルギー/秒</span><br>
+                            <span id="Sakasa-levelup-needH">0生命力</span>
+                        </li>
+                    </ul>
+                </div>
+                <div id="dis3" class="bgv">
+                    <ul class="side-by-side">
+                        <li id="Echizen-e-lv" class="lv bgv"></li>
+                        <li class="des bgv">
+                            エチゼンクラゲ
+                            <span class="des">説明説明説明説明説明説明説明</span><br>
+                            <span id="Echizen-nowE">現在：0エネルギー/秒</span>
+                            <br>
+                        </li>
+                        <li id="Echizen-e-levelup" class="up bgv">
+                            <span id="Echizen-levelup-incE">+0エネルギー/秒</span><br>
+                            <span id="Echizen-levelup-needH">0生命力</span>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
     </div>
 
     <!--  フッター(下部)部分  -->
     <footer>
         <ul id="footer-control" class="side-by-side bg">
-            <li id="footer-control-home" class="bgv">ホーム</li>
-            <li id="footer-control-evo" class="bgv">進化</li>
+            <li id="home" class="bgv">ホーム</li>
+            <li id="evo" class="bgv">進化</li>
         </ul>
     </footer>
 
     <!-- ライブラリファイル -->
-    <!--
     <script src="lib/jquery-3.1.1.min.js"></script>
--->
     <!-- 自作ファイル群 -->
-    <!--    <script type="text/javascript" src="script/common.js"></script>
--->
+    <script type="text/javascript" src="script/common.js"></script>
 
 </body>
 

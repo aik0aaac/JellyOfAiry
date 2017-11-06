@@ -31,19 +31,22 @@ ul.side-by-side li { display: inline-block; }
 #header { z-index: 100; }
 
 #gauge { top: 30px; left: 20px; position: fixed; font-size: 30px; color: white; }
-
-#control-bar { top: 30px; right: 20px; position: fixed; }
+#gauge .increase { font-size: .6em; }
 
 .header-icon { margin: 8px; }
 
 .header-icon-img { height: 32px; margin-right: 8px; }
 
+#control-bar { top: 30px; right: 20px; position: fixed; }
+
 /*------------------------*/
 /* センタービジュアル(中央)部分のCSS */
 /*------------------------*/
+main { width: 100%; height: 700px; background-color: #rgba 255, 255, 255, 0.5; }
+
 #Airy { top: 200px; width: 100%; position: absolute; text-align: center; }
 
-#Airy-img { height: 550px; }
+#Airy-img { height: 330px; }
 
 #Mily { top: 300px; width: 100%; position: absolute; text-align: center; }
 
@@ -52,48 +55,27 @@ ul.side-by-side li { display: inline-block; }
 /*------------------------*/
 /* メイン操作(下部)部分のCSS */
 /*------------------------*/
+.tab { overflow: hidden; }
+.tab li.select { background: black; }
+
 #mope { top: 800px; width: 95%; height: 35%; position: absolute; margin: 20px; }
 
-/* タブ表示のCSSここから */
-.tab-radios[type="radio"] { display: block; }
+#mope-tab { /* タブ表示のCSSここから */ }
+#mope-tab .tab-label { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; cursor: pointer; -webkit-transition-duration: .2s; transition-duration: .2s; }
+#mope-tab .tab-label:hover { color: #666; }
 
-.tab-label { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; cursor: pointer; -webkit-transition-duration: .2s; transition-duration: .2s; }
-
-.tab-label:hover { color: #666; }
-
-.mope-field-con { max-height: 0; opacity: 0; -webkit-transition-duration: .3s; transition-duration: .3s; }
-
-.mope-field-con { max-height: 0; opacity: 0; -webkit-transition-duration: .3s; transition-duration: .3s; }
-
-/* タブのチェック機構ここから */
-#mope-field-mily-ctrl:checked ~ .mope-field-con #mope-field-mily { max-height: initial; opacity: 1; }
-
-#mope-field-friend-ctrl:checked ~ .mope-field-con #mope-field-friend { max-height: initial; opacity: 1; }
-
-#mope-field-mily-ctrl:checked ~ #mope-tabs-list #for-mope-field-mily { pointer-events: none; cursor: default; }
-
-#mope-field-mily-ctrl:checked ~ #mope-tabs-list #for-mope-field-mily label.tab-label { opacity: .6; }
-
-#mope-field-friend-ctrl:checked ~ #mope-tabs-list #for-mope-field-friend { pointer-events: none; cursor: default; }
-
-#mope-field-friend-ctrl:checked ~ #mope-tabs-list #for-mope-field-friend label.tab-label { opacity: .6; }
-
-/* タブのチェック機構ここまで */
-/* タブ表示のCSSここまで */
-#mope-tag { margin-bottom: 10px; }
-
-#mope-tag li { padding: 10px 20px; }
-
-.mope-field-con:not(:first-child) { margin-top: 10px; }
+#mope-tab { margin-bottom: 10px; }
+#mope-tab li { padding: 10px 20px; }
 
 #mope-field { margin-top: 20px; }
+#mope-field .con:not(:first-child) { margin-top: 10px; }
+#mope-field .lv { width: 15%; padding: 10px; }
+#mope-field .des { width: 50%; padding: 10px; }
+#mope-field .up { width: 20%; padding: 10px; font-size: 20px; }
 
-.mope-field-lv { width: 15%; padding: 10px; }
+.hide { display: none; }
 
-.mope-field-des { width: 50%; padding: 10px; }
-
-.mope-field-up { width: 20%; padding: 10px; font-size: 20px; }
-
+/* タブ表示のCSSここまで */
 /*------------------------*/
 /* フッター(下部)部分のCSS */
 /*------------------------*/
@@ -112,14 +94,22 @@ footer { bottom: 0; position: fixed; width: 100%; z-index: 100; }
 @media only screen and (max-width: 640px) {     /*     img{ max-width: 100%; height: auto; width: auto; }
 */
   /* ～以下、画面の横幅が640pxまでの場合のスタイル記入～ */ }
+/* JSで追加される要素のCSS
+*/
+/*--------------------------------------------------*/
+/* ゲーム部分本体のCSS */
+/*--------------------------------------------------*/
+#heart-increase-click { margin-left: 2em; padding: .5em 1em; font-size: .5em; color: black; border-radius: 100px; background-color: rgba(254, 254, 254, 0.5); transition: all .5s; }
+
+.main-heart-des { position: absolute; width: 6em; padding: .5em; background-color: rgba(0, 0, 0, 0.5); font-size: .5em; color: white; z-index: 110; transition: all .3s; }
+
 /* 基礎タグにつけるCSS ---------------------*/
+body { overflow-x: hidden; }
+
 /* ライブラリ等で追加された要素につけるCSS -------*/
 /* その他 */
 @keyframes show1 { 0% { transform: translate(0, 2em); opacity: .5; }
   100% { transform: translate(0, 0); opacity: 1; } }
-/* モーダルウィンドウコンテンツのCSS ---------------------*/
-#modal-overlay { /* 参考文献:https://syncer.jp/jquery-modal-window */ display: none; position: fixed; top: 0; left: 0; width: 100%; height: 120%; /* スマホ対策 */ background-color: rgba(0, 0, 0, 0.75); z-index: 1; }
-
 /* その他--------------------------------------- */
 
 /*# sourceMappingURL=index.css.map */

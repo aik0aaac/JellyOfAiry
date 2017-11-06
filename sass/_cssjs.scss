@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+/*
+    JSで追加される要素のCSS
+*/
+
+/*--------------------------------------------------*/
+
+/* ゲーム部分本体のCSS */
+
+/*--------------------------------------------------*/
+
+#heart-increase-click {
+    margin-left: 2em;
+    padding: .5em 1em;
+    font-size: .5em;
+    color: black;
+    border-radius: 100px;
+    background-color: rgba(254, 254, 254, 0.5);
+    transition: all .5s;
+}
+
+.main-heart-des {
+    position: absolute;
+    width: 6em;
+    padding: .5em;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: .5em;
+    color: white;
+    z-index: 110;
+    transition: all .3s;
+}

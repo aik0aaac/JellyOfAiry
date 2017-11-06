@@ -98,6 +98,7 @@ ul.side-by-side li {
     display: inline-block;
 }
 
+
 /*--------------------------------------------------*/
 
 /* ゲーム部分本体のCSS */
@@ -120,12 +121,9 @@ ul.side-by-side li {
     position: fixed;
     font-size: 30px;
     color: white;
-}
-
-#control-bar {
-    top: 30px;
-    right: 20px;
-    position: fixed;
+    .increase {
+        font-size: .6em;
+    }
 }
 
 .header-icon {
@@ -137,11 +135,23 @@ ul.side-by-side li {
     margin-right: 8px;
 }
 
+#control-bar {
+    top: 30px;
+    right: 20px;
+    position: fixed;
+}
+
 /*------------------------*/
 
 /* センタービジュアル(中央)部分のCSS */
 
 /*------------------------*/
+
+main {
+    width: 100%;
+    height: 700px;
+    background-color: #rgba(255, 255, 255, .5);
+}
 
 #Airy {
     top: 200px;
@@ -151,7 +161,7 @@ ul.side-by-side li {
 }
 
 #Airy-img {
-    height: 550px;
+    height: 330px;
 }
 
 #Mily {
@@ -171,6 +181,13 @@ ul.side-by-side li {
 
 /*------------------------*/
 
+.tab {
+    overflow: hidden;
+    li.select {
+        background: black;
+    }
+}
+
 #mope {
     top: 800px;
     width: 95%;
@@ -179,105 +196,59 @@ ul.side-by-side li {
     margin: 20px;
 }
 
-/* タブ表示のCSSここから */
+#mope-tab {
+    /* タブ表示のCSSここから */
+    .tab-label {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: pointer;
+        -webkit-transition-duration: .2s;
+        transition-duration: .2s;
+    }
 
-.tab-radios[type="radio"] {
-    display: block;
+    .tab-label:hover {
+        color: #666;
+    }
 }
 
-.tab-label {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: pointer;
-    -webkit-transition-duration: .2s;
-    transition-duration: .2s;
-}
 
-.tab-label:hover {
-    color: #666;
-}
 
-.mope-field-con {
-    max-height: 0;
-    opacity: 0;
-    -webkit-transition-duration: .3s;
-    transition-duration: .3s;
-}
-
-.mope-field-con {
-    max-height: 0;
-    opacity: 0;
-    -webkit-transition-duration: .3s;
-    transition-duration: .3s;
-}
-
-/* タブのチェック機構ここから */
-
-#mope-field-mily-ctrl:checked ~ .mope-field-con #mope-field-mily {
-    max-height: initial;
-    opacity: 1;
-}
-
-#mope-field-friend-ctrl:checked ~ .mope-field-con #mope-field-friend {
-    max-height: initial;
-    opacity: 1;
-}
-
-#mope-field-mily-ctrl:checked ~ #mope-tabs-list #for-mope-field-mily {
-    pointer-events: none;
-    cursor: default;
-}
-
-#mope-field-mily-ctrl:checked ~ #mope-tabs-list #for-mope-field-mily label.tab-label {
-    opacity: .6;
-}
-
-#mope-field-friend-ctrl:checked ~ #mope-tabs-list #for-mope-field-friend {
-    pointer-events: none;
-    cursor: default;
-}
-
-#mope-field-friend-ctrl:checked ~ #mope-tabs-list #for-mope-field-friend label.tab-label {
-    opacity: .6;
-}
-
-/* タブのチェック機構ここまで */
-
-/* タブ表示のCSSここまで */
-
-#mope-tag {
+#mope-tab {
     margin-bottom: 10px;
+    li {
+        padding: 10px 20px;
+    }
 }
 
-#mope-tag li {
-    padding: 10px 20px;
-}
-
-.mope-field-con:not(:first-child) {
-    margin-top: 10px;
-}
 
 #mope-field {
     margin-top: 20px;
+    .con:not(:first-child) {
+        margin-top: 10px;
+    }
+    .lv {
+        width: 15%;
+        padding: 10px;
+    }
+    .des {
+        width: 50%;
+        padding: 10px;
+    }
+
+    .up {
+        width: 20%;
+        padding: 10px;
+        font-size: 20px;
+    }
 }
 
-.mope-field-lv {
-    width: 15%;
-    padding: 10px;
+.hide {
+    display: none;
 }
 
-.mope-field-des {
-    width: 50%;
-    padding: 10px;
-}
-
-.mope-field-up {
-    width: 20%;
-    padding: 10px;
-    font-size: 20px;
-}
+/* タブ表示のCSSここまで */
 
 /*------------------------*/
 
