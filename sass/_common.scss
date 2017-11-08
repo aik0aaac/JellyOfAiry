@@ -115,12 +115,12 @@ ul.side-by-side li {
 /*------------------------*/
 
 header {
-    z-index: 100;
+    z-index: 500;
     .header-icon {
         margin: 8px;
     }
     .header-icon-img {
-        height: 32px;
+        height: 1.3em;
         margin-right: 8px;
     }
 
@@ -145,7 +145,16 @@ header {
     }
 }
 
-
+#mordal-setting {
+    li {
+        margin: .5em 0;
+        border-bottom: 1px solid #aaa;
+    }
+    li:hover {
+        pointer-events: fill;
+        color: #aaa;
+    }
+}
 
 
 
@@ -157,39 +166,63 @@ header {
 
 main {
     position: relative;
+    top: 5em;
     width: 100%;
-    height: 800px;
-    background-color: rgba(254, 254, 254, 0.3);
+    height: 20em;
 }
 
 #Airy {
     position: absolute;
-    top: 200px;
+    top: 0%;
     width: 100%;
     text-align: center;
+    animation-duration: 3s;
+    animation-name: updown-Airy;
+    animation-iteration-count: infinite;
 }
 
 #Airy-img {
-    height: 330px;
+    height: 600px;
+    opacity: .8;
 }
+
+@keyframes updown-Airy {
+    0% {
+        top: 1%;
+    }
+    50% {
+        top: 0%;
+    }
+    100% {
+        top: 1%;
+    }
+}
+
 
 #Mily {
     position: absolute;
-    top: 300px;
-    width: 100%;
-    text-align: center;
+    top: 50%;
+    right: 10%;
+    animation-duration: 5s;
+    animation-name: updown-Mily;
+    animation-iteration-count: infinite;
 }
 
 #Mily-img {
-    height: 150px;
+    height: 225px;
+    opacity: .7;
 }
 
-#Mily-tap {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    width: 100px;
-    background-color: #aaa;
+@keyframes updown-Mily {
+    0% {
+        top: 50%;
+    }
+    50% {
+        top: 45%;
+    }
+    100% {
+        top: 50%;
+    }
 }
 
 /*------------------------*/
@@ -250,27 +283,50 @@ main {
     }
     .des {
         width: 50%;
-        padding: 10px;
+        padding: .5em;
     }
     .des-des {
-        margin: .5em;
+        padding: .5em;
         font-size: .7em;
 
     }
     .nowEH {
-        margin-top: .5em;
+        padding-top: .5em;
         font-size: .8em;
         text-align: right;
     }
     .up {
+        position: relative;
         width: 20%;
         padding: 10px;
         font-size: .8em;
         text-align: center;
+        color: white;
+        background-color: rgba(0, 0, 0, .5);
     }
     .up:hover {
         color: #555;
     }
+    .up-icon {
+        position: absolute;
+        top: -2.5em;
+        right: 5%;
+        padding: .5em;
+        font-size: .6rem;
+        color: black;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, .7);
+    }
+    .up-icon:before {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -20px;
+        border: 10px solid transparent;
+        border-top: 10px solid rgba(255, 255, 255, .7);
+    }
+
 }
 
 .hide {
@@ -300,6 +356,7 @@ footer {
         background-color: rgba(255, 255, 255, .8);
     }
 }
+
 
 
 /*--------------------------------------------------*/

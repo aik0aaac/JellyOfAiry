@@ -30,29 +30,36 @@ ul.side-by-side li { display: inline-block; }
 /*------------------------*/
 /* ヘッダー(上部)部分のCSS */
 /*------------------------*/
-header { z-index: 100; }
+header { z-index: 500; }
 header .header-icon { margin: 8px; }
-header .header-icon-img { height: 32px; margin-right: 8px; }
+header .header-icon-img { height: 1.3em; margin-right: 8px; }
 header #gauge { top: 1em; left: 20px; position: fixed; font-size: 30px; color: white; }
 header #gauge .increase { font-size: .6em; }
 header #gauge #heart { position: relative; }
 header #control-bar { top: 1em; right: 20px; position: fixed; }
 
+#mordal-setting li { margin: .5em 0; border-bottom: 1px solid #aaa; }
+#mordal-setting li:hover { pointer-events: fill; color: #aaa; }
+
 /*------------------------*/
 /* センタービジュアル(中央)部分のCSS */
 /*------------------------*/
-main { position: relative; width: 100%; height: 800px; background-color: rgba(254, 254, 254, 0.3); }
+main { position: relative; top: 5em; width: 100%; height: 20em; }
 
-#Airy { position: absolute; top: 200px; width: 100%; text-align: center; }
+#Airy { position: absolute; top: 0%; width: 100%; text-align: center; animation-duration: 3s; animation-name: updown-Airy; animation-iteration-count: infinite; }
 
-#Airy-img { height: 330px; }
+#Airy-img { height: 600px; opacity: .8; }
 
-#Mily { position: absolute; top: 300px; width: 100%; text-align: center; }
+@keyframes updown-Airy { 0% { top: 1%; }
+  50% { top: 0%; }
+  100% { top: 1%; } }
+#Mily { position: absolute; top: 50%; right: 10%; animation-duration: 5s; animation-name: updown-Mily; animation-iteration-count: infinite; }
 
-#Mily-img { height: 150px; }
+#Mily-img { height: 225px; opacity: .7; }
 
-#Mily-tap { position: absolute; bottom: 0px; right: 0px; width: 100px; background-color: #aaa; }
-
+@keyframes updown-Mily { 0% { top: 50%; }
+  50% { top: 45%; }
+  100% { top: 50%; } }
 /*------------------------*/
 /* メイン操作(下部)部分のCSS */
 /*------------------------*/
@@ -69,11 +76,13 @@ main { position: relative; width: 100%; height: 800px; background-color: rgba(25
 #mope-field .con:hover { background-color: rgba(255, 255, 255, 0.8); }
 #mope-field .con:not(:first-child) { margin-top: 10px; }
 #mope-field .lv { width: 15%; padding: 10px; text-align: center; }
-#mope-field .des { width: 50%; padding: 10px; }
-#mope-field .des-des { margin: .5em; font-size: .7em; }
-#mope-field .nowEH { margin-top: .5em; font-size: .8em; text-align: right; }
-#mope-field .up { width: 20%; padding: 10px; font-size: .8em; text-align: center; }
+#mope-field .des { width: 50%; padding: .5em; }
+#mope-field .des-des { padding: .5em; font-size: .7em; }
+#mope-field .nowEH { padding-top: .5em; font-size: .8em; text-align: right; }
+#mope-field .up { position: relative; width: 20%; padding: 10px; font-size: .8em; text-align: center; color: white; background-color: rgba(0, 0, 0, 0.5); }
 #mope-field .up:hover { color: #555; }
+#mope-field .up-icon { position: absolute; top: -2.5em; right: 5%; padding: .5em; font-size: .6rem; color: black; border-radius: 5px; background-color: rgba(255, 255, 255, 0.7); }
+#mope-field .up-icon:before { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -20px; border: 10px solid transparent; border-top: 10px solid rgba(255, 255, 255, 0.7); }
 
 .hide { display: none; }
 
@@ -97,6 +106,11 @@ footer .btn { width: 45%; margin-left: 10px; margin-bottom: 10px; padding: 10px;
   /* ～以下、画面の横幅が640pxまでの場合のスタイル記入～ */ }
 /* JSで追加される要素のCSS
 */
+/* モーダルウィンドウコンテンツのCSS ---------------------*/
+.mordal-content { display: none; position: fixed; width: 50%; padding: 1em 2em; background: #fff; border-radius: 10px; z-index: 999; }
+
+#mordal-overlay { /* 参考文献:https://syncer.jp/jquery-mordal-window */ display: none; position: fixed; top: 0; left: 0; width: 100%; height: 120%; /* スマホ対策 */ background-color: rgba(0, 0, 0, 0.75); z-index: 998; }
+
 /*--------------------------------------------------*/
 /* ゲーム部分本体のCSS */
 /*--------------------------------------------------*/

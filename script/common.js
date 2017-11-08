@@ -21,7 +21,7 @@ if (!window.localStorage) {
     swal({
         title: "お使いのブラウザはlocalstorageに対応しておりません。",
         text: "データの保持が出来ないため、このウインドウを閉じるとLvやエネルギー量、生命力量はリセットされます。",
-        dangerMode: true,
+        dangerMode: true
     });
 }
 // localStorageに値を保存
@@ -44,7 +44,7 @@ function removeItem(key) {
 }
 
 // localStorageに保存されているすべての値を削除する
-function clear() {
+function localStorageClear() {
     window.localStorage.clear();
 }
 
@@ -59,18 +59,48 @@ $(function () {
             console.log("---autoSave done")
             setItem("ALL_ENERGY", ALL_ENERGY);
             setItem("ALL_HEART", ALL_HEART);
+
+            setItem("mily.energy", mily.energy);
+            setItem("mily.heart", mily.heart);
             setItem("mily.eLevel", mily.eLevel);
             setItem("mily.hLevel", mily.hLevel);
+            setItem("mily.needE", mily.needE);
+            setItem("mily.needH", mily.needH);
+
+            setItem("andon.energy", andon.energy);
+            setItem("andon.heart", andon.heart);
             setItem("andon.eLevel", andon.eLevel);
             setItem("andon.hLevel", andon.hLevel);
+            setItem("andon.needE", andon.needE);
+            setItem("andon.needH", andon.needH);
+
+            setItem("beni.energy", beni.energy);
+            setItem("beni.heart", beni.heart);
             setItem("beni.eLevel", beni.eLevel);
             setItem("beni.hLevel", beni.hLevel);
+            setItem("beni.needE", beni.needE);
+            setItem("beni.needH", beni.needH);
+
+            setItem("tako.energy", tako.energy);
+            setItem("tako.heart", tako.heart);
             setItem("tako.eLevel", tako.eLevel);
             setItem("tako.hLevel", tako.hLevel);
+            setItem("tako.needE", tako.needE);
+            setItem("tako.needH", tako.needH);
+
+            setItem("sakasa.energy", sakasa.energy);
+            setItem("sakasa.heart", sakasa.heart);
             setItem("sakasa.eLevel", sakasa.eLevel);
             setItem("sakasa.hLevel", sakasa.hLevel);
+            setItem("sakasa.needE", sakasa.needE);
+            setItem("sakasa.needH", sakasa.needH);
+
+            setItem("echizen.energy", echizen.energy);
+            setItem("echizen.heart", echizen.heart);
             setItem("echizen.eLevel", echizen.eLevel);
             setItem("echizen.hLevel", echizen.hLevel);
+            setItem("echizen.needE", echizen.needE);
+            setItem("echizen.needH", echizen.needH);
         }, 1000);
     }
 });
@@ -119,18 +149,15 @@ function allEHUnit(value) {
     return value;
 
 }
-
-console.log("debug" + 100 / 1000);
 /* クリックで生命力を増やす */
 $('main').tap(function () {
     ALL_HEART++;
-    console.log(ALL_HEART);
     $('#heart-display').html(allEHUnit(ALL_HEART));
     $('#heart').append('<p id="heart-increase-click">+1</p>');
-    $('#Mily-tap').animate({
+    $('#Mily').animate({
         opacity: '0.5',
     }, 200);
-    $('#Mily-tap').animate({
+    $('#Mily').animate({
         opacity: '1',
     }, 200);
     $('#heart-increase-click').animate({
@@ -171,17 +198,18 @@ $('#friend').click(function () {
     needEDefault: エネルギー量のレベルを上げるのに必要生命力のデフォルト値
     needHDefault: 生命力量のレベルを上げるのに必要エネルギー量のデフォルト値
 */
-function Creatures(ed, hd, b, n, el, hl) {
-    this.energy = 0;
+
+function Creatures(e, ed, h, hd, b, n, ne, nh, el, hl) {
+    this.energy = e;
     this.eDefault = ed;
-    this.heart = 0;
+    this.heart = h;
     this.hDefault = hd;
     this.bias = b;
 
     this.needEDefault = n;
-    this.needE = n;
+    this.needE = ne;
     this.needHDefault = n;
-    this.needH = n;
+    this.needH = nh;
 
     this.eLevel = el;
     this.hLevel = hl;
@@ -198,22 +226,58 @@ var CreaturesName = {
 };
 
 // 各生き物のデータ定義
-var mily = new Creatures(50000, 10, 1, 10,
+var mily = new Creatures(
+    getItem("mily.energy", 0),
+    50000,
+    getItem("mily.heart", 0),
+    10, 1, 10,
+    getItem("mily.needE", 10),
+    getItem("mily.needH", 10),
     getItem("mily.eLevel", 1),
     getItem("mily.hLevel", 1));
-var andon = new Creatures(20, 0, 1, 10,
+var andon = new Creatures(
+    getItem("andon.energy", 0),
+    20,
+    getItem("andon.heart", 0),
+    0, 1, 10,
+    getItem("andon.needE", 10),
+    getItem("andon.needH", 10),
     getItem("andon.eLevel", 1),
     getItem("andon.hLevel", 1));
-var beni = new Creatures(200, 0, 2, 50,
+var beni = new Creatures(
+    getItem("beni.energy", 0),
+    200,
+    getItem("beni.heart", 0),
+    0, 2, 50,
+    getItem("beni.needE", 50),
+    getItem("beni.needH", 50),
     getItem("beni.eLevel", 1),
     getItem("beni.hLevel", 1));
-var tako = new Creatures(2000, 0, 3, 100,
+var tako = new Creatures(
+    getItem("tako.energy", 0),
+    2000,
+    getItem("tako.heart", 0),
+    0, 3, 100,
+    getItem("tako.needE", 100),
+    getItem("tako.needH", 100),
     getItem("tako.eLevel", 1),
     getItem("tako.hLevel", 1));
-var sakasa = new Creatures(20000, 0, 4, 500,
+var sakasa = new Creatures(
+    getItem("sakasa.energy", 0),
+    20000,
+    getItem("sakasa.heart", 0),
+    0, 4, 500,
+    getItem("sakasa.needE", 500),
+    getItem("sakasa.needH", 500),
     getItem("sakasa.eLevel", 1),
     getItem("sakasa.hLevel", 1));
-var echizen = new Creatures(200000, 0, 5, 1000,
+var echizen = new Creatures(
+    getItem("echizen.energy", 0),
+    200000,
+    getItem("echizen.heart", 0),
+    0, 5, 1000,
+    getItem("echizen.needE", 1000),
+    getItem("echizen.needH", 1000),
     getItem("echizen.eLevel", 1),
     getItem("echizen.hLevel", 1));
 
@@ -277,9 +341,10 @@ function creatureDisplay(eh, who, whoName) {
     who: どの生き物か
     amount: 何レベル上がるか
 */
+
 function levelUp(eh, who, whoName, amount) {
     if (eh == ENERGY) {
-        $('#' + whoName + '-e-levelup').click(function () {
+        $('#' + whoName + '-e-levelup').tap(function () {
             if (ALL_HEART < who.needE) {
                 swal({
                     title: "生命力が足りません！",
@@ -294,7 +359,7 @@ function levelUp(eh, who, whoName, amount) {
             creatureDisplay(ENERGY, who, whoName);
         });
     } else if (eh == HEART) {
-        $('#' + whoName + '-h-levelup').click(function () {
+        $('#' + whoName + '-h-levelup').tap(function () {
             if (ALL_ENERGY < who.needH) {
                 swal({
                     title: "エネルギーが足りません！",
@@ -333,6 +398,53 @@ function increaseAll() {
     console.log("ALL HEART is " + allEHUnit(ALL_HEART));
 }
 
+// 全てのデータを初期化する関数
+function dataAllClear() {
+    ALL_ENERGY = 0;
+    ALL_HEART = 0;
+
+    mily.energy = 0;
+    mily.heart = 0;
+    mily.eLevel = 1;
+    mily.hLevel = 1;
+    mily.needE = 10;
+    mily.needH = 10;
+
+    andon.energy = 0;
+    andon.heart = 0;
+    andon.eLevel = 1;
+    andon.hLevel = 1;
+    andon.needE = 10;
+    andon.needH = 10;
+
+    beni.energy = 0;
+    beni.heart = 0;
+    beni.eLevel = 1;
+    beni.hLevel = 1;
+    beni.needE = 50;
+    beni.needH = 50;
+
+    tako.energy = 0;
+    tako.heart = 0;
+    tako.eLevel = 1;
+    tako.hLevel = 1;
+    tako.needE = 100;
+    tako.needH = 100;
+
+    sakasa.energy = 0;
+    sakasa.heart = 0;
+    sakasa.eLevel = 1;
+    sakasa.hLevel = 1;
+    sakasa.needE = 500;
+    sakasa.needH = 500;
+
+    echizen.energy = 0;
+    echizen.heart = 0;
+    echizen.eLevel = 1;
+    echizen.hLevel = 1;
+    echizen.needE = 1000;
+    echizen.needH = 1000;
+}
 
 /* 実際に実行 ------------------------*/
 $(function () {
@@ -358,4 +470,113 @@ $(function () {
     }, 1000);
 
 
+});
+
+// 設定画面-データの消去
+function settingRemove() {
+    console.log("settingRemove-----------------")
+    swal({
+        title: "全データの消去をします。",
+        text: "この動作は取り消せません。それでもよろしいですか?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        closeMordal: false
+    }).then((willDelete) => {
+        if (willDelete) {
+            localStorageClear();
+            dataAllClear();
+            swal("消去完了です!", "", "success");
+        } else {
+            return false;
+        }
+    });
+}
+/**
+ *  ユーザーのデバイスを返す
+ *  @return     スマホ(sp)、タブレット(tab)、その他(other)
+ */
+function getDevice() {
+    var ua = navigator.userAgent;
+    if (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0) {
+        return 'sp';
+    } else if (ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0) {
+        return 'tab';
+    } else {
+        return 'other';
+    }
+}
+
+/**
+ * モーダルウィンドウ表示関数
+ * @param val 表示したいモーダルウィンドウのコンテンツのID/Class(文字列で)
+ */
+var CURRENT_SCROLL_Y;
+
+function displayMordalWindow(val) {
+    CURRENT_SCROLL_Y = $(window).scrollTop();
+    $("body").css({
+        "position": "fixed",
+        "top": (-1 * CURRENT_SCROLL_Y)
+    });
+    $(val).css({
+        "display": "block"
+    });
+    //キーボード操作などにより、オーバーレイが多重起動するのを防止する
+    $(this).blur(); //ボタンからフォーカスを外す
+    if ($("#mordal-overlay")[0]) return false; //新しくモーダルウィンドウを起動しない
+    //オーバーレイ用のHTMLコードを、[body]内の最後に生成する
+    $("body").append('<div id="mordal-overlay" onclick="mordalWindow_close(\'' + val + '\')"></div>');
+    //[$mordal-overlay]をフェードインさせる
+    $("#mordal-overlay").fadeIn("slow");
+    $(val).fadeIn("slow");
+    // センタリングをする
+    var jud = getDevice();
+    console.log(jud);
+    if (jud == 'sp') {
+        // スマホだったら、ウインドウを少し高めに設定
+        $(val).css({
+            "top": 10 + "%",
+        });
+        var pxleft = (($(window).width() - $(val).outerWidth(true)) / 2);
+        $(val).css({
+            "left": pxleft + "px",
+        });
+    } else {
+        // その他だったら、ウインドウを中央に設定
+        // ※真ん中配置：(ウィンドウの幅∨高さ - コンテンツの幅∨高さ) /2
+        var pxtop = (($(window).height() - $(val).outerHeight(true)) / 4);
+        $(val).css({
+            "top": pxtop + "px",
+        });
+        var pxleft = (($(window).width() - $(val).outerWidth(true)) / 2);
+        $(val).css({
+            "left": pxleft + "px",
+        });
+    }
+
+}
+
+/**
+ * モーダルウィンドウを閉じる関数
+ * @param val 表示したいモーダルウィンドウのコンテンツのID/Class(文字列で)
+ */
+function mordalWindow_close(val) {
+    $(val).fadeOut("slow");
+    $("#mordal-overlay").fadeOut("slow");
+    $("#mordal-overlay").unbind() // unbind()…対象の要素にそれまで設定されていたイベントをクリアする
+    $("#mordal-overlay").remove(); //フェードアウト後、[#mordal-overlay]をHTML(DOM)上から削除
+    $("body").attr({
+        style: ''
+    });
+    $("html,body").prop({
+        scrollTop: CURRENT_SCROLL_Y
+    });
+}
+
+// 進化遷移、設定画面の処理
+$(function () {
+    $('#setting').click(function () {
+        displayMordalWindow('#mordal-setting');
+    });
 });

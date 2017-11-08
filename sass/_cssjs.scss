@@ -4,6 +4,31 @@
     JSで追加される要素のCSS
 */
 
+/* モーダルウィンドウコンテンツのCSS ---------------------*/
+
+.mordal-content {
+    display: none;
+    position: fixed;
+    width: 50%;
+    padding: 1em 2em;
+    background: #fff;
+    border-radius: 10px;
+    z-index: 999;
+}
+
+#mordal-overlay {
+    /* 参考文献:https://syncer.jp/jquery-mordal-window */
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    /* スマホ対策 */
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 998;
+}
+
 /*--------------------------------------------------*/
 
 /* ゲーム部分本体のCSS */
