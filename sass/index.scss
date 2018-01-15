@@ -1,33 +1,138 @@
 @charset "utf-8";
 @import "common";
 @import "cssjs";
-/* 基礎タグにつけるCSS ---------------------*/
+
+$font1: "Malgun Gothic";
+$font2: "なごみ極細ゴシック ExtraLight";
+$font3: "ほのか丸ゴシック";
+$font4: "游ゴシック Light";
+$font5: "超極細ゴシック";
+
+/*--------------------------------------------------*/
+
+/* 基礎CSS */
+
+/*--------------------------------------------------*/
 
 body {
-    overflow-x: hidden;
+    font-family: $font4;
+    font-size: 24px;
 }
 
-/* ライブラリ等で追加された要素につけるCSS -------*/
-
-.swal-footer {
-    background-color: #CBE6F3;
-    margin-top: 32px;
-    border-top: 1px solid #E9EEF1;
-    overflow: hidden;
+a {
+    color: white;
+    text-decoration: none;
+    transition: .5s;
 }
 
-/* その他 */
+a:hover {
+    opacity: .5;
+}
 
-@keyframes show1 {
-    0% {
-        transform: translate(0, 2em);
-        opacity: .5;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+    z-index: 100;
+}
+
+ul {
+    list-style: none;
+}
+
+.con {
+    position: relative;
+    padding: 5em;
+    width: 100%;
+    height: 100vh;
+    background-color: #bbb;
+    h2 {
+        width: 80%;
+        .main {
+            padding-left: 1em;
+            font-size: 1.7em;
+            border-bottom: 1px solid black;
+        }
+        .sub {
+            padding-right: 1em;
+            font-size: 0.7em;
+            text-align: right;
+        }
     }
-    100% {
-        transform: translate(0, 0);
-        opacity: 1;
+    .tri {
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: 0;
+        border: 50vh solid transparent;
+        border-top: 100vw solid #aaa;
+        border-bottom: none;
+        background-color: #888;
+    }
+
+    .tri.right {
+        right: 0;
+        transform: rotate(90deg);
+    }
+
+    .tri.left {
+        left: 0;
+        transform: rotate(-90deg);
+    }
+
+    .right {
+        text-align: right;
+    }
+
+    .des {
+        position: absolute;
+        left: 35%;
+        width: 40%;
+    }
+
+}
+
+/*--------------------------------------------------*/
+
+/* 各コンテンツ毎 */
+
+/*--------------------------------------------------*/
+
+.menu {
+    position: absolute;
+    bottom: 5vh;
+    left: 2vw;
+    font-size: .8em;
+    color: white;
+    line-height: 1.5em;
+    z-index: 100;
+}
+
+#con1 {
+    height: 150vh;
+    padding: 0;
+    .title {
+        position: absolute;
+        top: 20vh;
+    }
+    .des {
+        position: absolute;
+        top: 50vh;
+        text-align: center;
+        p {
+            line-height: 1.2em;
+        }
+    }
+    .img {
+        position: absolute;
+        bottom: 5vh;
+        .img1 {
+            height: 50vh;
+        }
     }
 }
 
-
-/* その他--------------------------------------- */
+#con2 {}

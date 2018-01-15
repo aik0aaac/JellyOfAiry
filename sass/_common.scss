@@ -1,387 +1,105 @@
-@charset "utf-8";
-
-/*
-Sass利用法：
-    コマンドプロンプトを起動
-    このディレクトリ直上のディレクトリまで移動
-    「sass --watch sass:css --style compact」
-    後は放置で自動的にいける
-
-Sass手引き：
-    ■セレクタ、プロパティの入れ子
-    ■「&(親)」セレクタ
-    ■セレクタの継承(「@extend セレクタ」)
-    ■変数(「$変数名: 値;」)
-    ■Mixin
-      ・引数なし：
-        @mixin Mixinの名前 {
-            中身…
-        }
-      ・引数あり
-        @mixin Mixinの名前(引数１,引数２…){
-            中身…
-        }
-      ・引数あり（デフォルト値付き）
-        @mixin Mixinの名前(引数１:デフォルト値,引数２:デフォルト値…){
-            中身…
-        }
-    ■@import
-    ■partials
-*/
-
 /*--------------------------------------------------*/
 
 /* 基礎CSS */
 
 /*--------------------------------------------------*/
 
-@font-face {
-    font-family: "GN-きんいろサンセリフ 太字";
-    src: url('../font/GN-Kin-iro_SansSerif.ttf');
-}
-
-html {
-    width: 100%;
-    font-family: "GN-きんいろサンセリフ 太字";
-    font-size: 32px;
-}
-
 body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    z-index: 0;
+    overflow-x: hidden;
 }
 
-body:after {
-    /*擬似要素をつくる*/
-    position: fixed;
-    /*固定配置*/
-    top: 0;
-    left: 0;
-    /*左上に固定*/
-    width: 100%;
-    height: 100%;
-    /*画面全体を覆う*/
-    content: "";
-    background: -webkit-linear-gradient(#000046 0%, #1CB5E0 100%);
-    background: -o-linear-gradient(#000046 0%, #1CB5E0 100%);
-    background: linear-gradient(#000046 0%, #1CB5E0 100%);
+/*--------------------------------------------------*/
+
+/* ライブラリ等で追加された要素につけるCSS */
+
+/*--------------------------------------------------*/
+
+.swal-footer {
+    background-color: #CBE6F3;
+    margin-top: 32px;
+    border-top: 1px solid #E9EEF1;
+    overflow: hidden;
+}
+
+/* その他 */
+
+@keyframes show1 {
+    0% {
+        transform: translate(0, 2em);
+        opacity: .5;
+    }
+    100% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+/*--------------------------------------------------*/
+
+/* その他 */
+
+/*--------------------------------------------------*/
+
+.box-center {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.blue-gra {
+    color: white;
+    background: -webkit-linear-gradient(#000046 0%, #1CB5E0 50%, white 100%);
+    background: -o-linear-gradient(#000046 0%, #1CB5E0 50%, white 100%);
+    background: linear-gradient(#000046 0%, #1CB5E0 50%, white 100%);
     animation: huerotator 3s infinite alternate;
-    z-index: -100;
+
 }
 
-@keyframes huerotator {
-    0% {
-        -webkit-filter: hue-rotate(0deg);
-        filter: hue-rotate(0deg);
-    }
-
-    100% {
-        -webkit-filter: hue-rotate(-20deg);
-        filter: hue-rotate(-20deg);
-    }
-}
-
-ul,
-li {
-    margin: 0;
-    padding: 0;
-}
-
-ul {
-    list-style: none;
-}
-
-ul.side-by-side li {
-    display: inline-block;
-}
-
-.center {
-    text-align: center;
-}
-
-/*--------------------------------------------------*/
-
-/* ゲーム部分本体のCSS */
-
-/*--------------------------------------------------*/
-
-/*------------------------*/
-
-/* ヘッダー(上部)部分のCSS */
-
-/*------------------------*/
-
-header {
-    z-index: 500;
-    .header-icon {
-        margin: 8px;
-    }
-    .header-icon-img {
-        height: 1.3em;
-        margin-right: 8px;
-    }
-
-    #gauge {
-        top: 1em;
-        left: 20px;
-        position: fixed;
-        font-size: 30px;
-        color: white;
-        .increase {
-            font-size: .6em;
-        }
-        #heart {
-            position: relative;
-        }
-    }
-
-    #control-bar {
-        top: 1em;
-        right: 20px;
-        position: fixed;
-    }
-}
-
-#mordal-setting {
-    li {
-        margin: .5em 0;
-        border-bottom: 1px solid #aaa;
-    }
-    li:hover {
-        pointer-events: fill;
-        color: #aaa;
-    }
-}
-
-
-
-/*------------------------*/
-
-/* センタービジュアル(中央)部分のCSS */
-
-/*------------------------*/
-
-main {
-    position: relative;
-    top: 5em;
-    width: 100%;
-    height: 20em;
-}
-
-#Airy {
+.wave {
+    opacity: .1;
     position: absolute;
-    top: 0%;
-    width: 100%;
-    text-align: center;
-    animation-duration: 3s;
-    animation-name: updown-Airy;
-    animation-iteration-count: infinite;
-}
-
-#Airy-img {
-    height: 600px;
-    opacity: .8;
-}
-
-@keyframes updown-Airy {
-    0% {
-        top: 1%;
-    }
-    50% {
-        top: 0%;
-    }
-    100% {
-        top: 1%;
-    }
-}
-
-
-#Mily {
-    position: absolute;
-    top: 50%;
-    right: 10%;
-    animation-duration: 5s;
-    animation-name: updown-Mily;
-    animation-iteration-count: infinite;
-}
-
-#Mily-img {
-    height: 225px;
-    opacity: .7;
-}
-
-@keyframes updown-Mily {
-    0% {
-        top: 50%;
-    }
-    50% {
-        top: 45%;
-    }
-    100% {
-        top: 50%;
-    }
-}
-
-/*------------------------*/
-
-/* メイン操作(下部)部分のCSS */
-
-/*------------------------*/
-
-/* タブ表示のCSSここから */
-
-#mope {
-    top: 800px;
-    width: 95%;
-    height: 35%;
-    position: absolute;
-    margin: 20px;
-    #mope-tab {
-        margin-bottom: 10px;
-        li {
-            padding: 10px 20px;
-        }
-    }
-    .tab-label {
-        position: relative;
-        background-color: rgba(255, 255, 255, .5);
-        border-radius: 5px;
-    }
-    .select {
-        background-color: rgba(255, 255, 255, .8);
-    }
-    .select:before {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -20px;
-        border: 10px solid transparent;
-        border-top: 10px solid rgba(255, 255, 255, .8);
-    }
-}
-
-
-#mope-field {
-    margin-top: 20px;
-    .con {
-        background-color: rgba(255, 255, 255, .7);
-    }
-    .con:hover {
-        background-color: rgba(255, 255, 255, .8);
-    }
-    .con:not(:first-child) {
-        margin-top: 10px;
-    }
-    .lv {
-        width: 15%;
-        padding: 10px;
-        text-align: center;
-    }
-    .des {
-        width: 50%;
-        padding: .5em;
-    }
-    .des-des {
-        padding: .5em;
-        font-size: .7em;
-
-    }
-    .nowEH {
-        padding-top: .5em;
-        font-size: .8em;
-        text-align: right;
-    }
-    .up {
-        position: relative;
-        width: 20%;
-        padding: 10px;
-        font-size: .8em;
-        text-align: center;
-        color: white;
-        background-color: rgba(0, 0, 0, .5);
-    }
-    .up:hover {
-        color: #555;
-    }
-    .up-icon {
-        position: absolute;
-        top: -2.5em;
-        right: 5%;
-        padding: .5em;
-        font-size: .6rem;
-        color: black;
-        border-radius: 5px;
-        background-color: rgba(255, 255, 255, .7);
-    }
-    .up-icon:before {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -20px;
-        border: 10px solid transparent;
-        border-top: 10px solid rgba(255, 255, 255, .7);
-    }
-
-}
-
-.hide {
-    display: none;
-}
-
-/* タブ表示のCSSここまで */
-
-/*------------------------*/
-
-/* フッター(下部)部分のCSS */
-
-/*------------------------*/
-
-footer {
-    bottom: 0;
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-    .btn {
-        width: 45%;
-        margin-left: 10px;
-        margin-bottom: 10px;
-        padding: 10px;
-        text-align: center;
-        font-size: 1.2em;
-        background-color: rgba(255, 255, 255, .8);
-    }
-}
-
-
-
-/*--------------------------------------------------*/
-
-/* デバッグ用CSS */
-
-/*--------------------------------------------------*/
-
-.bgv {
+    top: 3%;
+    left: 10%;
     background-color: white;
+    width: 100%;
+    height: 200vh;
+    margin-left: -50vw;
+    margin-top: -100vh;
+    transform-origin: 50% 48%;
+    border-radius: 100%;
+    animation: drift 3000ms infinite linear;
+    z-index: 10;
 }
 
-/*--------------------------------------------------*/
+.wave.wave2 {
+    animation: drift 7000ms infinite linear;
+    opacity: .1;
+    background-color: red;
+}
 
-/* smart.css  画面の横幅が640pxまで */
+.wave.wave3 {
+    animation: drift 5000ms infinite linear;
+    background-color: black;
+}
 
-/*--------------------------------------------------*/
 
-@media only screen and (max-width:640px) {
-    /*     img{
-        max-width: 100%;
-        height: auto;
-        width: auto;
+@keyframes drift {
+    from {
+        transform: rotate(0deg);
     }
-*/
-    /* ～以下、画面の横幅が640pxまでの場合のスタイル記入～ */
-    body {}
+    from {
+        transform: rotate(360deg);
+    }
 }
